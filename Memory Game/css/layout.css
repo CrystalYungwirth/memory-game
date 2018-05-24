@@ -47,7 +47,12 @@
   display: none;
 }
 
-.results,
-.try-again {
-  display: block;
+.results {
+  display: flex;
+  flex-direction: column;
+}
+
+.star-display {
+  display: flex;
+  flex-direction: row;
 }

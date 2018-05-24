@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 let card = document.getElementsByClassName('card');
-let cards = [...card]
+let cards = [...card];
 console.log(cards);
 
 /*
@@ -11,8 +11,7 @@ console.log(cards);
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-const DECK = document.getElementById('cardSpread');
-let matchedCards = [];
+const DEALT_CARDS = document.getElementById('dealtCards');
 
 /**
  * @description Randomizes card layout
@@ -35,21 +34,26 @@ function shuffle(array) {
 }
 
 /**
- * @description starts new game
+ * @description Starts new game
  */
 function startGame() {
-  cards = shuffle(cards);
-  moveTally.innerHTML = `Moves: 0`;
-  TIMER.innerHTML = `0:00`;
-
-  for (var i = 0; i < cards.length; i++) {
-    DECK.innerHTML = "";
-    [].forEach.call(cards, function(item) {
-      DECK.appendChild(item);
-    });
-    cards[i].classList.remove('face-up', 'match', 'disabled');
-  }
+    resetMoves();
+    resetTimer();
+    cards = shuffle(cards);
+    
+    for (var i = 0; i < cards.length; i++) {
+        dealCards();
+        cards[i].classList.remove('face-up', 'match', 'disabled');
+    }
 }
+/**
+ * @description Deals cards to unique location for each game.
+ */
+const dealCards = () => {
+    [].forEach.call(cards, deal => {
+      DEALT_CARDS.appendChild(deal);
+    });
+};
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -64,37 +68,45 @@ function startGame() {
 /**
  *@description count player's moves
  *@param {number} moves
- *@param {array} stars
  *@returns {number} running tally of moves taken
- *@returns {number} stars rating reduced based on moves taken
  */
-const STARS = document.querySelectorAll('.fa-star');
-let starsList = document.querySelectorAll('.stars li');
+
 let moves = 0;
 let moveTally = document.querySelector('.moves');
 
 const moveCounter = () => {
   moves++;
+  moveTally.innerHTML = `Moves: ${moves}`;
+  currentStars();
 
   if (moves == 1) {
     startTimer();
   }
-  // Decrement star rating based on moves taken
-  if (moves > 20 && moves < 30) {
-    for (i = 0; i < 3; i++) {
-      if (i == 2) {
-        STARS[i].style.visibility = 'collapse';
-      }
-    }
-  } else if (moves >= 29) {
-    for (i = 0; i < 3; i++) {
-      if (i > 0) {
-        STARS[i].style.visibility = 'collapse';
-      }
-    }
-  }
-  moveTally.innerHTML = `Moves: ${moves}`;
 };
+
+/**
+ *@description count player's moves
+ *@param {array} stars
+ *@returns {string} stars rating reduced based on moves taken
+ */
+const STARS = document.querySelectorAll('.fa-star');
+let starsList = document.querySelectorAll('.stars li');
+
+function currentStars() {
+    if (moves > 20 && moves < 30) {
+        for (i = 0; i < 3; i++) {
+            if (i == 2) {
+                STARS[i].style.visibility = 'collapse';
+            }
+        }
+    } else if (moves >= 29) {
+        for (i = 0; i < 3; i++) {
+            if (i > 0) {
+                STARS[i].style.visibility = 'collapse';
+            }
+        }
+    }
+}
 
 /**
  *@description reset player's moves
@@ -106,7 +118,6 @@ const resetMoves = () => {
   moveTally.innerHTML = `Moves: ${moves}`;
 };
 
-
 /**
  * @description game timer
  * @param {number} seconds
@@ -114,7 +125,6 @@ const resetMoves = () => {
  * @param {number} interval for incrementing time elapsed
  * @returns {string} current elapsed time
  */
-
 const TIMER = document.querySelector('.timer');
 let seconds = 0;
 let minutes = 0;
@@ -123,7 +133,6 @@ let interval;
 const startTimer = () => {
   interval = setInterval(function() {
     seconds++;
-
     TIMER.innerHTML = (seconds <= 9) ? `${minutes}:0${seconds}` : `${minutes}:${seconds}`;
 
     if (seconds >= 59) {
@@ -132,6 +141,7 @@ const startTimer = () => {
     }
   }, 1000);
 };
+
 /**
  * @description reset timer on load and restart
  * @param {number} seconds
@@ -145,10 +155,19 @@ const resetTimer = () => {
   TIMER.innerHTML = `${minutes}:0${seconds}`;
 };
 
-
+/**
+ * @description Start a new game
+ * @param {number} seconds
+ * @param {number} minutes
+ * @returns {string} resets elapsed time
+ */
 const RESTART = document.querySelector('.restart');
 RESTART.addEventListener('click', () => {
-  location.reload();
+  resetTimer();
+  resetMoves();
+      for (var i = 0; i < cards.length; i++) {
+        cards[i].classList.remove('face-up', 'match', 'disabled');
+    }
 });
 
 
@@ -160,9 +179,11 @@ function displayCard() {
 }
 
 /**
- * @description add opened cards to matchedCards list and check if cards are match or not
+ * @description Check if cards are a match. Disable if a match, return to face down if not.
  */
 let match = document.getElementsByClassName('match');
+let matchedCards = [];
+
 function matchCheck() {
   matchedCards.push(this);
   let sets = matchedCards.length;
@@ -190,12 +211,12 @@ const matched = () => {
  *@desciption Mismatch animation then flip cards face down
  */
 const mismatched = () => {
-  matchedCards[0].classList.add("mismatched");
-  matchedCards[1].classList.add("mismatched");
+  matchedCards[0].classList.add('mismatched');
+  matchedCards[1].classList.add('mismatched');
   disable();
   setTimeout(function() {
-    matchedCards[0].classList.remove('face-up', "mismatched");
-    matchedCards[1].classList.remove('face-up', "mismatched");
+    matchedCards[0].classList.remove('face-up', 'mismatched');
+    matchedCards[1].classList.remove('face-up', 'mismatched');
     enable();
     matchedCards = [];
   }, 600);
@@ -205,7 +226,7 @@ const mismatched = () => {
  * @description card disable
  */
  const disable = () => {
-  [].filter.call(cards, function(card) {
+  [].filter.call(cards, card => {
     card.classList.add('disabled');
   });
 };
@@ -214,7 +235,7 @@ const mismatched = () => {
  * @description enables card play
  */
 const enable = () => {
-  [].filter.call(cards, function(card) {
+  [].filter.call(cards, card => {
     card.classList.remove('disabled');
     for (var i = 0; i < match.length; i++) {
       match[i].classList.add('disabled');
@@ -225,17 +246,18 @@ const enable = () => {
 /**
  * @description Display results of game in modal upon completion
  */
-let modal = document.getElementById("modal");
+let modal = document.getElementById('modal');
+
 const results = () => {
   if (match.length == 16) {
     completionTime = TIMER.innerHTML;
     clearInterval(interval);
     modal.style.display = "block";
 
-    let starRating = document.querySelector(".stars").innerHTML;
+    let starRating = document.querySelector('.stars').innerHTML;
     document.getElementById('starRating').innerHTML = starRating;
     let resultsMsg = document.getElementById('resultsHeader');
-    resultsMsg.insertAdjacentText("afterend", `You matched all the cards in ${completionTime} using ${moves} turns.`);
+    resultsMsg.insertAdjacentText('afterend', `You matched all the cards in ${completionTime} using ${moves} turns.`);
 
     closeModal();
   };
@@ -245,14 +267,16 @@ const results = () => {
  * @description Close results modal and reset page for new game
  */
 let close = document.querySelector('.close-modal');
+
 const closeModal = () => {
   close.addEventListener('click', () => {
     modal.style.display = "none";
   });
 }
 
-const tryAgain = () => {
-  location.reload();
+const playAgain = () => {
+    startGame();
+    modal.style.display = "none";
 }
 
 for (let i = 0; i < cards.length; i++) {
@@ -260,6 +284,6 @@ for (let i = 0; i < cards.length; i++) {
   card.addEventListener('click', displayCard);
   card.addEventListener('click', matchCheck);
   card.addEventListener('click', results);
-};
+}
 
 document.body.onload = startGame();
