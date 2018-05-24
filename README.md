@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-* [Overbiew](#overview)
+* [Overview](#overview)
 * [How to Play](#howtoplay)
 * [Dependencies](#dependencies)
 
@@ -11,6 +11,8 @@
 This project was developed as a requirement for the 2018 Udacity Front-End Nanodegree program. 
 
 [Project Specification](Project%20Specification.pdf)
+
+I tailored the start code provided by Udacity to replace the use of Boostrap fontawesome with Thomas the Tank Engine images. 
 
 ## How to Play
 
