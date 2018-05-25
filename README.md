@@ -6,6 +6,7 @@
 * [How to Play](#how-to-play)
 * [Dependencies](#dependencies)
 * [Contributions](#contributions)
+* [License](#license)
 
 ## Overview
 
@@ -33,3 +34,6 @@ A score panel maintains the star level, move count, timer, and a restart button.
 
 ## Contributions
 Any pull requests for ideas on how to improve the code will be reviewed, but since it's a class project I most likely won't merge them.
+
+## License
+[MIT License](license.md)
