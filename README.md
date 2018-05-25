@@ -3,16 +3,15 @@
 ## Table of Contents
 
 * [Overview](#overview)
-* [How to Play](#howtoplay)
+* [How to Play](#how-to-play)
 * [Dependencies](#dependencies)
+* [Contributions](#contributions)
 
 ## Overview
 
 This project was developed as a requirement for the 2018 Udacity Front-End Nanodegree program. 
 
 [Project Specification](Project%20Specification.pdf)
-
-I tailored the start code provided by Udacity to replace the use of Boostrap fontawesome with Thomas the Tank Engine images. 
 
 ## How to Play
 
@@ -27,3 +26,10 @@ A score panel maintains the star level, move count, timer, and a restart button.
   * 2 Stars -   Moves between 21 and 29
   * 1 Star  -   Moves greater than 30
 
+## Dependencies
+
+* [Font Awesome](https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css)
+* [Google Fonts](https://fonts.googleapis.com)
+
+## Contributions
+Any pull requests for ideas on how to improve the code will be reviewed, but since it's a class project I most likely won't merge them.
