@@ -29,8 +29,8 @@ A score panel maintains the star level, move count, timer, and a restart button.
 
 ## Dependencies
 
-* [Font Awesome](https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css)
-* [Google Fonts](https://fonts.googleapis.com)
+* [Font Awesome](https://fontawesome.com)
+* [Google Fonts](https://fonts.google.com)
 
 ## Contributions
 Any pull requests for ideas on how to improve the code will be reviewed, but since it's a class project I most likely won't merge them.
