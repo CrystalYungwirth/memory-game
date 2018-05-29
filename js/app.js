@@ -41,6 +41,7 @@ function startGame() {
     resetMoves();
     resetTimer();
     resetStars();
+    matchedCards = [];
     
     for (let i = 0; i < cards.length; i++) {
         dealCards();
@@ -176,10 +177,12 @@ RESTART.addEventListener('click', () => {
     resetTimer();
     resetStars();
     resetMoves();
-        for (var i = 0; i < cards.length; i++) {
-            cards[i].classList.remove('face-up', 'match', 'disabled');
-        }
-});
+    matchedCards = [];
+    
+    for (var i = 0; i < cards.length; i++) {
+        cards[i].classList.remove('face-up', 'match', 'disabled');
+    }
+    });
 
 
 /**

@@ -2,19 +2,38 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [Overview](#overview)
+* [How to Play](#how-to-play)
+* [Dependencies](#dependencies)
+* [Contributions](#contributions)
+* [License](#license)
 
-## Instructions
+## Overview
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+This project was developed as a requirement for the 2018 Udacity Front-End Nanodegree program. 
 
-To get started, open `js/app.js` and start building out the app's functionality
+[Project Specification](Project%20Specification.pdf)
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## How to Play
 
-## Contributing
+The game is based on the classic card game Memory. The goal is to match two identical cards in as few moves as possible. To achieve a good score requires a strong memory of where you had seen cards previously.
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+The game starts with 16 cards faced down. A single click will turn a card face-up. After two cards are turned faced-up, they are checked to see if they are a pair. If paired, the paired animation executes, then they remain face-up and are no longer in play. If they are not a pair, a mismatched animation executes, they are returned to face down, and remain in play.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+A score panel maintains the star level, move count, timer, and a restart button. The star level is based on the move count. One move consists of two turned over cards. 
+
+*Star Levels*
+  * 3 Stars -   Moves less than 20
+  * 2 Stars -   Moves between 21 and 29
+  * 1 Star  -   Moves greater than 30
+
+## Dependencies
+
+* [Font Awesome](https://fontawesome.com)
+* [Google Fonts](https://fonts.google.com)
+
+## Contributions
+Any pull requests for ideas on how to improve the code will be reviewed, but since it's a class project I most likely won't merge them.
+
+## License
+[MIT License](LICENSE)
